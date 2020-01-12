@@ -1,0 +1,28 @@
+
+body {
+	background-color: #DDEEFF;
+}
+
+#userID {
+	text-align: left;
+	font-weight: bold;
+}
+
+#timeRemaining {
+	text-align: right;
+	font-weight: bold;
+}
+
+#assessmentTitle {
+	color: red;
+	text-align: center;
+}
+
+
+#question1, #question2, #question3 {
+	font-weight: bold;
+}
+
+#bottomButtons {
+	text-align: center;
+}
