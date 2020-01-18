@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Performance Quiz 5 - Right Frame</title>
+<link href="PerformanceQuiz5.css" rel="stylesheet">
+<script type="text/javascript" src="PQ5.js"></script>
+</head>
+<body>
+<!-- This is the document that defines the left frame of PerformanceQuiz5.html -->
+
+<div id="rightFrameForm">
+<form action="" method="post">
+	<table>
+		<!-- Create a table within a form that will contain the radio buttons and the text indicating which radio button is which -->
+		<tr>
+			<!-- The first row contains text identifying the radio buttons -->
+			<td>1</td>
+			<td>2</td>
+			<td>3</td>
+			<td>4</td>
+			<td>5</td>
+		</tr>
+		<tr>
+			<!-- The second row contains the labels and inputs for each radio button. Each radio button is given a unique ID. This ID is either passed to the changeSelection function when a radio button is clicked in the right frame, or used by the changeSelection function to identify which radio button is to be selected when the select element is used in the left frame -->
+			<td><label><input type="radio" name="radioGroup" value="radio" id="radioButton1" onClick="changeSelection('radio', this.id)"></label></td>
+			<td><label><input type="radio" name="radioGroup" value="radio" id="radioButton2" onClick="changeSelection('radio', this.id)"></label></td>
+			<td><label><input type="radio" name="radioGroup" value="radio" id="radioButton3" onClick="changeSelection('radio', this.id)"></label></td>
+			<td><label><input type="radio" name="radioGroup" value="radio" id="radioButton4" onClick="changeSelection('radio', this.id)"></label></td>
+			<td><label><input type="radio" name="radioGroup" value="radio" id="radioButton5" onClick="changeSelection('radio', this.id)"></label></td>
+		</tr>
+	</table>
+</form>
+</div>
+
+</body>

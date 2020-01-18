@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>BandCo Data Entry - Performance Quiz 2</title>
+<link href="PerformanceQuiz2.css" rel="stylesheet">
+<script type="text/javascript" src="PQ2.js"></script>
+</head>
+
+<body>
+
+<h1>BandCo Data Entry System</h1>
+<hr>
+<br>
+<p>Welcome to BandCo data entry! Here you can enter you can manage your tour by entering information about tour events.</p>
+<br>
+<h3>Enter event information</h3>
+<div id="DataEntry">
+	<p>Venue: <input id="venueInput" type="text" placeholder="Rock & Roll Hall of Fame">
+	Street address: <input id="addressInput" type="text" placeholder="1100 E 9th St"></p>
+	<p>City: <input id="cityInput" type="text" placeholder="Cleveland">
+	State: <input id="stateInput" type="text" placeholder="OH">
+	ZIP code: <input id="zipInput" type="text" placeholder="44114"></p>
+	<p>Date of show: <input id="dateInput" type="text" placeholder="05/25/2021">
+	Time of show: <input id="timeInput" type="text" placeholder="8:00 PM">
+	Price of entry: $<input id="priceInput" type="text" placeholder="30.00"></p>
+	<p>Phone number to contact for further information: <input id="phoneInput" type="text" placeholder="216-781-7625">
+	Website: <input id="websiteInput" type="text" placeholder="www.rockhall.com">
+	Also playing (additional bands): <input id="alsoPlayingInput" type="text" placeholder="The Eagles"></p>
+</div>
+
+<br>
+<div id="buttons">
+<button onclick="saveData()">Save</button>
+<button onclick="clearFields()">Erase</button>
+</div>
+<br>
+<hr>
+
+<h3>Saved output</h3>
+
+<div id="results">
+<table id="ResultsTable">
+</table>
+</div>
+
+<hr>
+<div id="footer">
+</div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+/* This CSS stylesheet is used by both the left frame (leftFrame.html) and right frame (rightFrame.html) of the PerformanceQuiz5.html document */
+
+body {
+	background-color: cornflowerblue;
+	/* Set the background color to cornflowerblue */
+}
+
+form {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	/* Set both frames' forms to center horizontally and vertically using the position, top, left, and transform attributes */
+}
+
+td {
+	padding: 0px 20px;
+	/* Increase the horizontal spacing between the table cells in the right frame, in order to space out the labels and radio buttons */
+}
+
+input[type="radio"] {
+    -ms-transform: scale(2);
+    -webkit-transform: scale(2);
+    transform: scale(2);
+	/* Use the Internet Explorer 9, Chrome/Safari/Opera, or general transform properties to double the scale of the radio buttons. Other than the labels, these are the only elements in the right frame and so they can take up more space. */
+}
+
+select, td {
+	font-size: 250%;
+	/* Set the size of the select element (the only element in the left frame) and the text labels in the right frame to 250% of their original sizes */
+}
+
+td {
+	text-align: center;
+	/* Center the elements (text, labels, and radio buttons) within each cell of the table in the right frame */
+}

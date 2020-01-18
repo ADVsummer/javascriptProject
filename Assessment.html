@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Assessment</title>
+<link href="Assessment.css" rel="stylesheet">
+<script src="Assessment.js"></script>
+</head>
+
+<body>
+
+<div id="userID">[User ID]</div>
+<div id="timeRemaining">Time remaining: 00:00</div>
+<h1 id="assessmentTitle">Sample Assessment</h1>
+<hr>
+<br>
+<form action="/sample-url" method="post">
+
+	<div id="assessmentArea">
+	<p><div id="questionText"></div>
+	<div id="answerTextBox"><br><input type="text" name="qInput3" id="qInput3" placeholder="Enter an answer" required></div>
+	<br>
+	<label>
+		<div id="b1"><input type="radio" name="qInput1" value="radio" id="qInput1_1" required><div id="q1_1"></div></label></div>
+	<br>
+	<label>
+		<div id="b2"><input type="radio" name="qInput1" value="radio" id="qInput1_2" required><div id="q1_2"></div></label></div>
+	<br>
+	<label>
+		<div id="b3"><input type="radio" name="qInput1" value="radio" id="qInput1_3" required><div id="q1_3"></div></label></div>
+	<br>
+	<label>
+		<div id="b4"><input type="radio" name="qInput1" value="radio" id="qInput1_4" required><div id="q1_4"></div></label></div>
+	</p>	
+	</div>
+	
+	<div id="resultsTableDiv">
+		<table id="resultsTable">
+		</table>
+	</div>
+
+	<div id="bottomButtons">
+
+		<button type="button" id="beginButton" onclick="nextQuestion()">Begin Assessment</button>
+		<button type="button" id="finishButton" onclick="loadResults()">Finish Assessment</button>
+	</div>
+
+	
+</form>
+
+<hr>
+<div id="footer">
+</div>
+
+</body>
+</html>

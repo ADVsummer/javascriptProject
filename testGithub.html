@@ -1,3 +1,50 @@
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+
+<title>Untiled Document, for now</title>
+</head>
+
+<body>
+
 <script>
-alert("test");
+document.write("Let's put some \"quotes\" in here");
+
+document.write("Test \"escape double-quotes\" test"); //Write test with the escape sequence to display double-quotes
+var myData; //Declare a variable
+myData = 25; //Assign a value to a variable
+alert(myData); //Display a pop-up with the value of myData
+
+function test() {
+var myData2; //Declare a variable local to the test() function
+myData2 = 2;
+}
+
+var globalVar;
+globalVar = 1;
+
+function addToGlobalVar() {
+globalVar += 1;
+alert(globalVar);
+}
+
+addToGlobalVar();
+
+var myString = prompt("Please enter your name", "");
+
+document.write("Your name is: " + myString);
+var myVariable = new Array("Arthur", "Bill", "Charlie", 44);
+
+var myArray = new Array();
+var myArray[0] = new Array();
+
+myArray[0][0] = "Josh";
+myArray[0][1] = 55;
+
 </script>
+
+</body>
+</html>
+

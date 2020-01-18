@@ -1,0 +1,29 @@
+h3, #calculator {
+	text-align: center;
+}
+
+td {
+	width: 50px;
+	padding: 5px;
+}
+
+input {
+	width: 45px;
+	height: 45px;
+	font-size: 20pt;
+}
+
+#outputText {
+	text-align: right;
+	width: 250px;
+	font-size: 30pt;
+}
+
+table {
+	border: 1px solid;
+	padding: 5px;
+}
+
+#buttonEquals {
+	width: 106px;
+}

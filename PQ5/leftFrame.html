@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Performance Quiz 5 - Left Frame</title>
+<link href="PerformanceQuiz5.css" rel="stylesheet">
+<script type="text/javascript" src="PQ5.js"></script>
+</head>
+<body>
+<!-- This is the document that defines the left frame of PerformanceQuiz5.html -->
+
+<div id="leftFrameForm">
+<form action="" method="post">
+	<select id="selectElement" onChange="changeSelection('select', this.selectedIndex)" required> 
+	<!-- Create a select element within a form with five different selectable options (plus the default option). When the user selects one of the options (either with the mouse or with the keyboard), an onChange event is triggered that will select the associated radio button in the right frame -->
+		<option value="none" selected>Make A Selection</option>
+		<option value="radio1" id="select1")>Radio 1</option>
+		<option value="radio2" id="select2")>Radio 2</option>
+		<option value="radio3" id="select3")>Radio 3</option>
+		<option value="radio4" id="select4")>Radio 4</option>
+		<option value="radio5" id="select5")>Radio 5</option>
+		<!-- Each option is given a value that can be referenced if a radio button is selected in the right frame -->
+	</select>
+</form>
+</div>
+
+</body>

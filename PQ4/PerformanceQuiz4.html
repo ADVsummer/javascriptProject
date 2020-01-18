@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Calculator - Performance Quiz 4</title>
+<link href="PerformanceQuiz4.css" rel="stylesheet">
+<script type="text/javascript" src="PQ4.js"></script>
+</head>
+<body>
+
+<h2>JavaScript Calculator</h2>
+<br>
+<div id="calculator">
+<table id="calculatorTable">
+	<tr>
+		<td id="output" colspan="5"><input id="outputText" type="text" placeholder="0" disabled></td>
+	</tr>
+	<tr>
+		<td id="invisibleCell"></td>
+		<td>
+			<input type="button" id="button7" value="7" onclick="numberPressed(this.value)">
+		</td>
+		<td>
+			<input type="button" id="button8" value="8" onclick="numberPressed(this.value)">
+		</td>
+		<td>
+			<input type="button" id="button9" value="9" onclick="numberPressed(this.value)">
+		</td>
+		<td id="invisibleCell"></td>
+	</tr>
+	<tr>
+		<td id="invisibleCell"></td>
+		<td>
+			<input type="button" id="button4" value="4" onclick="numberPressed(this.value)">
+		</td>
+		<td>
+			<input type="button" id="button5" value="5" onclick="numberPressed(this.value)">
+		</td>
+		<td>
+			<input type="button" id="button6" value="6" onclick="numberPressed(this.value)">
+		</td>
+		<td id="invisibleCell"></td>
+	</tr>
+	<tr>
+		<td id="invisibleCell"></td>
+		<td>
+			<input type="button" id="button1" value="1" onclick="numberPressed(this.value)">
+		</td>
+		<td>
+			<input type="button" id="button2" value="2" onclick="numberPressed(this.value)">
+		</td>
+		<td>
+			<input type="button" id="button3" value="3" onclick="numberPressed(this.value)">
+		</td>
+		<td id="invisibleCell"></td>
+	</tr>
+	<tr>
+		<td id="invisibleCell"></td>
+		<td>
+			<input type="button" id="button0" value="0" onclick="numberPressed(this.value)">
+		</td>
+		<td id="invisibleCell"></td>
+		<td id="invisibleCell"></td>
+		<td id="invisibleCell"></td>
+	</tr>
+	<tr>
+		<td id="invisibleCell"></td>
+		<td id="invisibleCell"></td>
+		<td>
+			<input type="button" id="buttonPlus" value="+" onclick="operatorPressed(this.value)">
+		</td>
+		<td>
+			<input type="button" id="buttonMinus" value="-" onclick="operatorPressed(this.value)">
+		</td>
+		<td id="invisibleCell"></td>
+	</tr>
+	<tr>
+		<td id="invisibleCell"></td>
+		<td id="invisibleCell"></td>
+		<td>
+			<input type="button" id="buttonMultiply" value="*" onclick="operatorPressed(this.value)">
+		</td>
+		<td>
+			<input type="button" id="buttonDivide" value="/" onclick="operatorPressed(this.value)">
+		</td>
+		<td id="invisibleCell"></td>
+	</tr>
+	<tr>
+		<td id="invisibleCell"></td>
+		<td id="invisibleCell"></td>
+		<td colspan="2">
+			<input type="button" id="buttonEquals" value="=" onClick="equalsPressed()">
+		</td>
+		<td id="invisibleCell"></td>
+	</tr>
+</table>
+</div>
+</body>
