@@ -3,39 +3,43 @@ body {
 	background-color: #DDEEFF;
 }
 
-#userID {
-	text-align: left;
-	font-weight: bold;
-}
-
 #timeRemaining {
 	text-align: right;
 	font-weight: bold;
+	/* Display the amount of time remaining in the assessment at the top-right in bold text */
 }
 
 #assessmentTitle {
 	color: red;
 	text-align: center;
+	/* Display the title of the assessment (which is in an h1 element) in red text at the top-center of the page */
 }
 
-
-#question1, #question2, #question3 {
-	font-weight: bold;
-}
-
-#bottomButtons, #resultsTableDiv, table {
+#bottomButtons, #resultsTableDiv, table, #resultsTable {
 	text-align: center;
+	/* Center the bottom buttons, the results table, and the time limit input on the page */
 }
 
 #assessmentArea, #finishButton {
 	display: none;
+	/* Set the area where the questions are populated and the finishButton button to be invisible initially. Via JavaScript, once the assessment is started, the assessmentArea is populated with question and possible answer content. Upon reaching the last question in the assessment, JavaScript displays the finishButton button */
 }
 
 table, tr, td {
 	border: solid 1px;
+	/* Set the results table and the rows and cells within it to have a solid, 1-pixel-wide border */
 }
 
 td {
 	text-align: center;
 	padding: 2px;
+	/* Center the text within each table cell and set the padding for each cell to space the content out */
+}
+
+#builderInstructions {
+	color: darkviolet;
+}
+
+#builderQuestionTextBox {
+	width: 30%;
 }

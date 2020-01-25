@@ -1,3 +1,34 @@
+
+<!-- TO DO:
+
+DUE BY 1/27 (project milestone 3.1):
+
+-Convert from 3 questions to an incrementable array. How will it be defined?
+	-Assessement builder
+-Add a checkmark question type and allow the correct results to be a combination of different answers
+-Change the styling of the results table - possible bolded headers and colspan of all for the last row
+-User ID functionality or remove?
+-Fix the small glitch of the non-display table displaying as a dot?
+
+-Work on the project workbook
+
+DUE BY 1/27 (?) (project milestone 3.2):
+
+-Allow the user to choose the number of questions they wish to answer
+-Give the user the option to impose a time limit on themselves
+
+-turn the application into a multi-frame application so that it has a definite start and end (?)
+
+-Work on the project workbook
+
+ALSO DUE BY 2/4 (?) (project milestone 3.3):
+-Store user's information about previous results using cookies OR localStorage (HTML5). This enables us to give the user a running average score at the end of the quiz. This is the final milestone.
+
+-Work on the project workbook
+-All work for each milestone should have Agile user stories created, and final submissions should include user stories along with a screenshot of version control history in SourceTree and GitHub
+
+-->
+
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -7,42 +38,96 @@
 <script src="Assessment.js"></script>
 </head>
 
-<body>
+<body onload="mainScreen()">
 
-<div id="userID">[User ID]</div>
 <div id="timeRemaining">Time remaining: 00:00</div>
-<h1 id="assessmentTitle">Sample Assessment</h1>
+<!-- Placeholder for displaying the amount of time left on the assessment -->
+<h1 id="assessmentTitle">Welcome!</h1>
+<!-- h1 element displays the title of the assessment -->
 <hr>
 <br>
 <form action="/sample-url" method="post">
 
 	<div id="assessmentArea">
-	<p><div id="questionText"></div>
-	<div id="answerTextBox"><br><input type="text" name="qInput3" id="qInput3" placeholder="Enter an answer" required></div>
-	<br>
-	<label>
-		<div id="b1"><input type="radio" name="qInput1" value="radio" id="qInput1_1" required><div id="q1_1"></div></label></div>
-	<br>
-	<label>
-		<div id="b2"><input type="radio" name="qInput1" value="radio" id="qInput1_2" required><div id="q1_2"></div></label></div>
-	<br>
-	<label>
-		<div id="b3"><input type="radio" name="qInput1" value="radio" id="qInput1_3" required><div id="q1_3"></div></label></div>
-	<br>
-	<label>
-		<div id="b4"><input type="radio" name="qInput1" value="radio" id="qInput1_4" required><div id="q1_4"></div></label></div>
-	</p>	
+		<p><div id="questionText"></div>
+		<!-- The questionText div is initially blank, and is populated via the .innerHTML property by the nextQuestion function -->
+		<div id="answerTextBox"><br><input type="text" name="qInput3" id="qInput3" placeholder="Enter an answer" required></div>
+		<!-- Via JavaScript, the answerTextBox div containing a text box input only appears for fill-in-the-blank questions -->
+		<br>
+		<label>
+			<div id="b1"><input type="radio" name="qInput1" value="radio" id="qInput1_1" required><div id="q1_1"></div></label></div>
+		<br>
+		<label>
+			<div id="b2"><input type="radio" name="qInput1" value="radio" id="qInput1_2" required><div id="q1_2"></div></label></div>
+		<br>
+		<label>
+			<div id="b3"><input type="radio" name="qInput1" value="radio" id="qInput1_3" required><div id="q1_3"></div></label></div>
+		<br>
+		<label>
+			<div id="b4"><input type="radio" name="qInput1" value="radio" id="qInput1_4" required><div id="q1_4"></div></label></div>
+		<!-- Four radio button inputs are defined and named. Up to four of them are used for multiple choice questions and the first two of them are used for true/false questions. The radio buttons will disappear for fill-in-the-blank questions -->
+		</p>	
 	</div>
 	
 	<div id="resultsTableDiv">
 		<table id="resultsTable">
 		</table>
+		<!-- Define a table for results that is initially empty. The results are displayed here at the end of the assessment via the loadResults function -->
 	</div>
 
+	<div id="timeLimitArea">
+		<p>Set an optional time limit for the quiz in minutes:</p>
+		<input type="text" name="timeLimitTextBox" id="timeLimitTextBox">
+		<br>
+		<br>
+	</div>
+	
+	<div id="builderArea">
+		<p>Question # <div id="builderQuestionNumber"></div></p>
+		<br>
+		<p>What type of question is this?&nbsp&nbsp&nbsp&nbsp
+		<label style="font-weight:bold;">Multiple choice<input type="radio" name="builderQuestionChoice" value="radio" id="abm" onclick="mc()">&nbsp&nbsp&nbsp&nbsp</label>
+		<label style="font-weight:bold;">True/false<input type="radio" name="builderQuestionChoice" value="radio" id="abt" onclick="tf()">&nbsp&nbsp&nbsp&nbsp</label>
+		<label style="font-weight:bold;">Fill-in-the-blank<input type="radio" name="builderQuestionChoice" value="radio" id="abf" onclick="fitb()"></label>
+		</p>
+		<br>
+		<p>Enter the question that will be asked, ending in punctuation like "?" or ".":</p>
+		<input type="text" name="builderQuestionTextBox" id="builderQuestionTextBox" disabled>
+		<br>
+		<p><div id="builderInstructions"><br></div></p>
+		<br>
+		<label style="font-size:10px;">Correct answer?<input type="radio" name="builderCorrect" value="radio" id="abc1" onclick="correctBuilderQuestion()" disabled></label>
+		Answer A:
+		<input type="text" name="builderAnswers" id="ab1" disabled>
+		<br>
+		<label style="font-size:10px;">Correct answer?<input type="radio" name="builderCorrect" value="radio" id="abc2" onclick="correctBuilderQuestion()" disabled></label>
+		Answer B:
+		<input type="text" name="builderAnswers" id="ab2" disabled>
+		<br>
+		<label style="font-size:10px;">Correct answer?<input type="radio" name="builderCorrect" value="radio" id="abc3" onclick="correctBuilderQuestion()" disabled></label>
+		Answer C:
+		<input type="text" name="builderAnswers" id="ab3" disabled>
+		<br>
+		<label style="font-size:10px;">Correct answer?<input type="radio" name="builderCorrect" value="radio" id="abc4" onclick="correctBuilderQuestion()" disabled></label>
+		Answer D:
+		<input type="text" name="builderAnswers" id="ab4" disabled>
+		<br>	
+		<br>
+	</div>
+	
 	<div id="bottomButtons">
-
-		<button type="button" id="beginButton" onclick="nextQuestion()">Begin Assessment</button>
+		
+		<button type="button" id="addButton" onclick="assessmentBuilder()">Add another question</button>
+		<button type="button" id="saveButton" onclick="assessmentBuilder()">Save assessment</button>
+		<button type="button" id="builderButton" onclick="assessmentBuilder()">Open the Assessment Builder</button>
+		<button type="button" id="takeBuiltButton" onclick="timeSelection()">Take a built assessment</button>
+		<button type="button" id="takePracticeButton" onclick="practiceAssessment()">Take a practice assessment</button>
+		<button type="button" id="startButton" onclick="assessmentSelection()">Begin an Assessment</button>
+		<button type="button" id="backButton" onclick="mainScreen()">Back to main screen</button>
+		<button type="button" id="beginButton" onclick="nextQuestion()">Start!</button>
+		<!-- the beginButton button calls the nextQuestion function to populate the first question in the assessment and change the text of this button to "Next Question". When the last question is loaded, this button disappears -->
 		<button type="button" id="finishButton" onclick="loadResults()">Finish Assessment</button>
+		<!-- When the last question's content is loaded in the assessment (via the nextQuestion function), the finishButton button appears. When it is clicked, the loadResults function is called, which saves the last question and displays the results in the resultsTable table -->
 	</div>
 
 	
