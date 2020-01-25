@@ -216,35 +216,32 @@ function nextQuestion() { // This function is used when the beginButton button i
 	alert("questionNumber == " + questionNumber + "\nquestionArray[questionNumber][1] == " + questionArray[questionNumber][1]);
 	switch(questionArray[questionNumber][1]) { // Which inputs are displayed for the question are based on what type of question it is
 		case 'm':
-			alert("multiple choice question");
-			document.getElementById("b1").style.visibility = "display";
+			document.getElementById("b1").style.display = "inline";
 			document.getElementById("q1_1").innerHTML = questionArray[questionNumber][3];
-			document.getElementById("b2").style.visibility = "display";
+			document.getElementById("b2").style.display = "inline";
 			document.getElementById("q1_2").innerHTML = questionArray[questionNumber][4];
-			document.getElementById("b3").style.visibility = "display";
+			document.getElementById("b3").style.display = "inline";
 			document.getElementById("q1_3").innerHTML = questionArray[questionNumber][5];
-			document.getElementById("b4").style.visibility = "display";
+			document.getElementById("b4").style.display = "inline";
 			document.getElementById("q1_4").innerHTML = questionArray[questionNumber][6];
 			document.getElementById("answerTextBox").style.display = "none";
 			break;
 			// For multiple choice questions, display all four radio button inputs and make the text box invisible
 		case 't':
-			alert("true/false question");
-			document.getElementById("b1").style.visibility = "display";
+			document.getElementById("b1").style.display = "inline";
 			document.getElementById("q1_1").innerHTML = questionArray[questionNumber][3];
-			document.getElementById("b2").style.visibility = "display";
+			document.getElementById("b2").style.display = "inline";
 			document.getElementById("q1_2").innerHTML = questionArray[questionNumber][4];
-			document.getElementById("b3").style.visibility = "hidden";
-			document.getElementById("b4").style.visibility = "hidden";
+			document.getElementById("b3").style.display = "none";
+			document.getElementById("b4").style.display = "none";
 			document.getElementById("answerTextBox").style.display = "none";
 			break;
 			// For true/false questions, display only the first two radio button inputs and make the last two radio button inputs and the text box invisible
 		case 'f':
-			alert("fill-in-the-blank question");
-			document.getElementById("b1").style.visibility = "hidden";
-			document.getElementById("b2").style.visibility = "hidden";
-			document.getElementById("b3").style.visibility = "hidden";
-			document.getElementById("b4").style.visibility = "hidden";
+			document.getElementById("b1").style.display = "none";
+			document.getElementById("b2").style.display = "none";
+			document.getElementById("b3").style.display = "none";
+			document.getElementById("b4").style.display = "none";
 			document.getElementById("answerTextBox").style.display = "inline";
 			break;
 			// For fill-in-the-blank questions, make all radio button inputs invisible and display only the text box
