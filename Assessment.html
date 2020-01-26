@@ -6,8 +6,6 @@ DUE BY 1/27 (project milestone 3.1):
 -Convert from 3 questions to an incrementable array. How will it be defined?
 	-Assessement builder
 -Add a checkmark question type and allow the correct results to be a combination of different answers
--Change the styling of the results table - possible bolded headers and colspan of all for the last row
--User ID functionality or remove?
 -Fix the small glitch of the non-display table displaying as a dot?
 
 -Work on the project workbook
@@ -40,7 +38,7 @@ ALSO DUE BY 2/4 (?) (project milestone 3.3):
 
 <body onload="mainScreen()">
 
-<div id="timeRemaining">Time remaining: 00:00</div>
+<div id="timeRemaining" style="display:none;">Time remaining: 00:00</div>
 <!-- Placeholder for displaying the amount of time left on the assessment -->
 <h1 id="assessmentTitle">Welcome!</h1>
 <!-- h1 element displays the title of the assessment -->
@@ -96,15 +94,15 @@ ALSO DUE BY 2/4 (?) (project milestone 3.3):
 		<br>
 		<p><div id="builderInstructions"><br></div></p>
 		<br>
-		<label style="font-size:10px;">Correct answer?<input type="radio" name="builderCorrect" value="radio" id="abc1" onclick="correctBuilderQuestion()" disabled></label>
+		<label style="font-size:10px;">Correct answer?<input type="radio" name="builderCorrect" value="radio" id="abc1" disabled></label>
 		Answer A:
 		<input type="text" name="builderAnswers" id="ab1" disabled>
 		<br>
-		<label style="font-size:10px;">Correct answer?<input type="radio" name="builderCorrect" value="radio" id="abc2" onclick="correctBuilderQuestion()" disabled></label>
+		<label style="font-size:10px;">Correct answer?<input type="radio" name="builderCorrect" value="radio" id="abc2" disabled></label>
 		Answer B:
 		<input type="text" name="builderAnswers" id="ab2" disabled>
 		<br>
-		<label style="font-size:10px;">Correct answer?<input type="radio" name="builderCorrect" value="radio" id="abc3" onclick="correctBuilderQuestion()" disabled></label>
+		<label style="font-size:10px;">Correct answer?<input type="radio" name="builderCorrect" value="radio" id="abc3" disabled></label>
 		Answer C:
 		<input type="text" name="builderAnswers" id="ab3" disabled>
 		<br>
@@ -117,13 +115,34 @@ ALSO DUE BY 2/4 (?) (project milestone 3.3):
 	
 	<div id="bottomButtons">
 		
-		<button type="button" id="addButton" onclick="assessmentBuilder()">Add another question</button>
-		<button type="button" id="saveButton" onclick="assessmentBuilder()">Save assessment</button>
-		<button type="button" id="builderButton" onclick="assessmentBuilder()">Open the Assessment Builder</button>
-		<button type="button" id="takeBuiltButton" onclick="timeSelection()">Take a built assessment</button>
-		<button type="button" id="takePracticeButton" onclick="practiceAssessment()">Take a practice assessment</button>
-		<button type="button" id="startButton" onclick="assessmentSelection()">Begin an Assessment</button>
-		<button type="button" id="backButton" onclick="mainScreen()">Back to main screen</button>
+		<div class="tooltip">
+			<button type="button" id="addButton" onclick="assessmentBuilder()">Add another question</button>
+			<span class="tooltiptext">Add the next question to the assessment.</span>
+		</div>
+		<div class="tooltip">
+			<button type="button" id="saveButton" onclick="saveAssessment()">Save & exit</button>
+			<span class="tooltiptext">Save the assessment. After saving, users will be able to take this assessment.</span>
+		</div>
+		<div class="tooltip">
+			<button type="button" id="builderButton" onclick="beginAssessmentBuilder()">Open the Assessment Builder</button>
+			<span class="tooltiptext">Build a new quiz with the Assessment Builder. Any previously-built assessments will be erased.</span>
+		</div>
+		<div class="tooltip">
+			<button type="button" id="takeBuiltButton" onclick="validateAssessmentBuilt()">Take a built assessment</button>
+			<span class="tooltiptext">Take a quiz built with the Assessment Biulder.</span>
+		</div>
+		<div class="tooltip">
+			<button type="button" id="takePracticeButton" onclick="practiceAssessment()">Take a practice assessment</button>
+			<span class="tooltiptext">Take a pre-defined practice assessment.</span>
+		</div>
+		<div class="tooltip">
+			<button type="button" id="startButton" onclick="assessmentSelection()">Begin an Assessment</button>
+			<span class="tooltiptext">Take an quiz built with the Assessment Builder or take a pre-defined practice assessment.</span>
+		</div>
+		<div class ="tooltip">
+			<button type="button" id="backButton" onclick="mainScreen()">Back to main screen</button>
+			<span class="tooltiptext">Go back to the first screen.</span>
+		</div>
 		<button type="button" id="beginButton" onclick="nextQuestion()">Start!</button>
 		<!-- the beginButton button calls the nextQuestion function to populate the first question in the assessment and change the text of this button to "Next Question". When the last question is loaded, this button disappears -->
 		<button type="button" id="finishButton" onclick="loadResults()">Finish Assessment</button>

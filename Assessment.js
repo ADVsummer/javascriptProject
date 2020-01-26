@@ -1,13 +1,23 @@
 
 
-var testName, testLength; // Variables to later be used for the name of the assessment and the number of minutes the user has to complete the assessment
+var testName, testTime; // Variables to later be used for the name of the assessment and the number of minutes the user has to complete the assessment
 
 var assessmentBuilt = false;
 var questionArray;
 
 var questionNumber; // The number of the question that the user is currently viewing, initially set to 0 before the assessment is begun
 
+var areYouSure = true;
+var readyToSave;
+
 function mainScreen() {
+	if (!areYouSure) {
+		alert("Are you sure you want to go back to the main screen without saving? Press \"Back to main screen\" again to exit without saving.");
+		areYouSure = true;
+		return false;
+	}
+	areYouSure = true;
+	document.getElementById("timeRemaining").style.display = "none";
 	document.getElementById("assessmentTitle").innerHTML = "Welcome!";
 	document.getElementById("assessmentArea").style.display = "none";
 	document.getElementById("timeLimitArea").style.display = "none";
@@ -27,8 +37,14 @@ function mainScreen() {
 	selectedAnwsers = [];
 }
 
-function assessmentBuilder() {
-	document.getElementById("assessmentTitle").innerHTML = "Assessment Builder";
+var builderAssessment = new Array;
+var assessmentBuilderNumber;
+var builderQuestionType;
+
+function beginAssessmentBuilder() {
+	testName = prompt("Please enter the name of the assessment:");
+	
+	document.getElementById("assessmentTitle").innerHTML = "Assessment Builder - " + testName;
 	document.getElementById("assessmentArea").style.display = "none";
 	document.getElementById("timeLimitArea").style.display = "none";
 	document.getElementById("builderArea").style.display = "inline";
@@ -42,8 +58,203 @@ function assessmentBuilder() {
 	document.getElementById("backButton").style.display = "inline";
 	document.getElementById("beginButton").style.display = "none";
 	document.getElementById("finishButton").style.display = "none";
+
+	areYouSure = false;
+
+	assessmentBuilderNumber = 0;
+
+	document.getElementById("builderQuestionNumber").innerHTML = assessmentBuilderNumber + 1;
 }
 
+
+function assessmentBuilder() {
+	readyToSave = false;
+	document.getElementById("assessmentTitle").innerHTML = "Assessment Builder - " + testName;
+	document.getElementById("assessmentArea").style.display = "none";
+	document.getElementById("timeLimitArea").style.display = "none";
+	document.getElementById("builderArea").style.display = "inline";
+
+	document.getElementById("addButton").style.display = "inline";
+	document.getElementById("saveButton").style.display = "inline";	
+	document.getElementById("builderButton").style.display = "none";
+	document.getElementById("takeBuiltButton").style.display = "none";
+	document.getElementById("takePracticeButton").style.display = "none";
+	document.getElementById("startButton").style.display = "none";
+	document.getElementById("backButton").style.display = "inline";
+	document.getElementById("beginButton").style.display = "none";
+	document.getElementById("finishButton").style.display = "none";
+	
+	
+	switch (validateAssessmentBuilder()) {
+		case true:
+			break;
+		case 2:
+			alert("Please select a question type: Multiple choice, true/false, or fill-in-the-blank.");
+			return false;
+			break;
+		case 3:
+			alert("Please fill in the question text.");
+			return false;
+			break;
+		case 4:
+			alert("Please select the correct answer for this question by using one of the radio buttons on the left.");
+			return false;
+			break;
+		case 5:
+			alert("Please fill in the answer for this fill-in-the-blank question.");
+			return false;
+			break;
+		case 6:
+			alert("Please fill in at least two possible answers for this multiple-choice question in the first two blanks.");
+			return false;
+			break;
+		default:
+			alert("Whoops!");
+			break;
+	}	
+	
+	var correctAnswerString;
+	
+	if (document.getElementById("abc1").checked) {
+		correctAnswerString = document.getElementById("ab1").value;
+	} else if (document.getElementById("abc2").checked) {
+		correctAnswerString = document.getElementById("ab2").value;
+	} else if (document.getElementById("abc3").checked) {
+		correctAnswerString = document.getElementById("ab3").value;
+	} else if (document.getElementById("abc4").checked) {
+		correctAnswerString = document.getElementById("ab4").value;
+	}
+
+	switch (builderQuestionType) {
+		case "m":
+			builderAssessment.push([document.getElementById("builderQuestionTextBox").value, "m", correctAnswerString, document.getElementById("ab1").value, document.getElementById("ab2").value, document.getElementById("ab3").value, document.getElementById("ab4").value]);
+			break;
+		case "t":
+			builderAssessment.push([document.getElementById("builderQuestionTextBox").value, "t", correctAnswerString, "True", "False", null, null]);
+			break;
+		case "f":
+			builderAssessment.push([document.getElementById("builderQuestionTextBox").value, "f", correctAnswerString, null, null, null, null]);
+			break;
+		default:
+			alert("Whoops!");
+			break;
+	}		
+	
+	assessmentBuilderNumber ++;
+	
+	document.getElementById("builderQuestionNumber").innerHTML = assessmentBuilderNumber + 1;
+	
+	clearAssessmentBuilderFields();
+	
+}
+
+function validateAssessmentBuilder() {
+	if (!document.getElementById("abm").checked && !document.getElementById("abt").checked && !document.getElementById("abf").checked) {
+		return 2;
+	}
+	if (document.getElementById("builderQuestionTextBox").value == "") {
+		return 3;
+	}
+	if (!document.getElementById("abc1").checked && !document.getElementById("abc2").checked && !document.getElementById("abc3").checked && !document.getElementById("abc4").checked) {
+		return 4;
+	}
+	if (document.getElementById("ab1").value == "" && builderQuestionType == "f") {
+		return 5;
+	}
+	if ((document.getElementById("ab1").value == "" || document.getElementById("ab2").value == "") && builderQuestionType == "m") {
+		return 6;
+	} 
+	else {
+		return true;
+	}
+}
+
+function clearAssessmentBuilderFields() {
+	document.getElementById("abm").checked = false;
+	document.getElementById("abt").checked = false;
+	document.getElementById("abf").checked = false;
+	document.getElementById("builderQuestionTextBox").value = "";
+	document.getElementById("builderInstructions").innerHTML = "&nbsp";
+	document.getElementById("abc1").checked = false;
+	document.getElementById("abc2").checked = false;
+	document.getElementById("abc3").checked = false;
+	document.getElementById("abc4").checked = false;
+	document.getElementById("ab1").value = "";
+	document.getElementById("ab2").value = "";
+	document.getElementById("ab3").value = "";
+	document.getElementById("ab4").value = "";
+	builderQuestionType = "";
+}
+
+function saveAssessment() {
+	if (!readyToSave) {
+		alert("Ready to save the assessment? Press \"Save & Exit\" again to confirm and exit to the main screen.");
+		readyToSave = true;
+		return false;
+	}
+
+	/* Begin repeated question validation and saving code from assessmentBuilder() */
+	switch (validateAssessmentBuilder()) {
+		case true:
+			break;
+		case 2:
+			alert("Please select a question type: Multiple choice, true/false, or fill-in-the-blank.");
+			return false;
+			break;
+		case 3:
+			alert("Please fill in the question text.");
+			return false;
+			break;
+		case 4:
+			alert("Please select the correct answer for this question by using one of the radio buttons on the left.");
+			return false;
+			break;
+		case 5:
+			alert("Please fill in the answer for this fill-in-the-blank question.");
+			return false;
+			break;
+		case 6:
+			alert("Please fill in at least two possible answers for this multiple-choice question in the first two blanks.");
+			return false;
+			break;
+		default:
+			alert("Whoops!");
+			break;
+	}	
+	
+	var correctAnswerString;
+	
+	if (document.getElementById("abc1").checked) {
+		correctAnswerString = document.getElementById("ab1").value;
+	} else if (document.getElementById("abc2").checked) {
+		correctAnswerString = document.getElementById("ab2").value;
+	} else if (document.getElementById("abc3").checked) {
+		correctAnswerString = document.getElementById("ab3").value;
+	} else if (document.getElementById("abc4").checked) {
+		correctAnswerString = document.getElementById("ab4").value;
+	}
+
+	switch (builderQuestionType) {
+		case "m":
+			builderAssessment.push([document.getElementById("builderQuestionTextBox").value, "m", correctAnswerString, document.getElementById("ab1").value, document.getElementById("ab2").value, document.getElementById("ab3").value, document.getElementById("ab4").value]);
+			break;
+		case "t":
+			builderAssessment.push([document.getElementById("builderQuestionTextBox").value, "t", correctAnswerString, "True", "False", null, null]);
+			break;
+		case "f":
+			builderAssessment.push([document.getElementById("builderQuestionTextBox").value, "f", correctAnswerString, null, null, null, null]);
+			break;
+		default:
+			alert("Whoops!");
+			break;
+	}		
+	/* Begin repeated question validation and saving code from assessmentBuilder() */
+
+	questionArray = builderAssessment;
+	assessmentBuilt = true;
+	mainScreen();
+}
+	
 function mc() {
 	document.getElementById("builderQuestionTextBox").disabled = false;
 	document.getElementById("builderInstructions").innerHTML = "Enter up to four possible answers for the multiple choice question:";
@@ -63,8 +274,8 @@ function mc() {
 	document.getElementById("abc2").checked = false;
 	document.getElementById("abc3").checked = false;
 	document.getElementById("abc4").checked = false;
+	builderQuestionType = "m";
 }
-
 function tf() {
 	document.getElementById("builderQuestionTextBox").disabled = false;
 	document.getElementById("builderInstructions").innerHTML = "This question will only have two possible answers: True or False.";
@@ -84,6 +295,7 @@ function tf() {
 	document.getElementById("abc2").checked = false;
 	document.getElementById("abc3").checked = false;
 	document.getElementById("abc4").checked = false;
+	builderQuestionType = "t";	
 }
 
 function fitb() {
@@ -105,6 +317,7 @@ function fitb() {
 	document.getElementById("abc2").checked = false;
 	document.getElementById("abc3").checked = false;
 	document.getElementById("abc4").checked = false;
+	builderQuestionType = "f";
 }
 
 function assessmentSelection() {
@@ -127,23 +340,33 @@ function assessmentSelection() {
 
 function practiceAssessment() {
 	testName = "Practice Assessment";
-/*	questionArray = [["Which answer is correct? Pick one: (hint - it's C!)", "m", "Answer C!", "Answer A!", "Answer B!", "Answer C!", "Answer D!"],
+	questionArray = [["Which answer is correct? Pick one: (hint - it's C!)", "m", "Answer C!", "Answer A!", "Answer B!", "Answer C!", "Answer D!"],
 						["True or false? (hint - it's True!)", "t", "True", "True", "False", null, null],
-						["The answer to this question is water", "f", "water", null, null, null]];*/
+						["The answer to this question is water", "f", "water", null, null, null]];
 						
-questionArray = [["mc A", "m", "A", "A", "B", "C", "D"],
+/*questionArray = [["mc A", "m", "A", "A", "B", "C", "D"],
 				["mc F", "m", "F", "E", "F", "G", "H"],
 						["True or false? (hint - it's True!)", "t", "True", "True", "False", null, null],
 						["mc K", "m", "K", "I", "J", "K", "L"],
 						["false", "t", "False", "True", "False", null, null],
 						["The answer to this question is water", "f", "water", null, null, null],
 						["fitb 123", "f", "123", null, null, null]
-						]
+						]*/
 						
 					
 						/* This array was formerly a one-dimensional array that held the content for one question, and is now a two-dimensional array containing information about every question on the assessment. There is one question per row in the Array, and the format of each question's information is:
 						Question text, question type (m for multiple choice, t for true/false, f for fill in the blank), the correct answer, and then up to four possible answers */
 	timeSelection();
+}
+
+function validateAssessmentBuilt() {
+	if (!assessmentBuilt) {
+		alert("Please navigate to the Assessment Builder and build an assessment first.");
+		return false;
+	} else {
+		timeSelection();
+		return true;
+	}
 }
 
 function timeSelection() {
@@ -166,13 +389,37 @@ function timeSelection() {
 	document.getElementById("beginButton").innerHTML = "Start!";
 	document.getElementById("finishButton").style.display = "none";
 }
-	
 
+function validateTime() {
+	if (document.getElementById("timeLimitTextBox").value != "") {
+		if (isNaN(document.getElementById("timeLimitTextBox").value, 10)) {
+			return false;
+		} else {
+			testTime = parseInt(document.getElementById("timeLimitTextBox").value, 10);
+			return true;
+		}
+	} else {
+		testTime = "unlimited";
+		return true;
+	}
+}
+			
 var selectedAnswers = new Array; // Define a one-dimensional array that will be populated with the user's selected answer for each question. The length of the array is the number of questions in the assessment
 var numberOfQuestions;
 
 function nextQuestion() { // This function is used when the beginButton button is pressed to save the user's selected answer to the current question and load the next question in the assessment
+	if (questionNumber == 0) {
+		if (!validateTime()) {
+			alert("Please enter the amount of time for the quiz in minutes, or leave this field blank to have an unlimited amount of time to take the quiz.");
+			return false;
+		} else {
+			validateTime();
+		}
+	}
+	areYouSure = false;
 	numberOfQuestions = questionArray.length;
+	document.getElementById("timeRemaining").style.display = "inline";
+	document.getElementById("timeRemaining").innerHTML = "Time remaining: " + testTime;
 	document.getElementById("assessmentTitle").innerHTML = testName;
 	document.getElementById("timeLimitArea").style.display = "none";
 	document.getElementById("assessmentArea").style.display = "inline"; // Display the area when the current question and possible answers will be populated. This is initially invisible before the assessment is begun
@@ -213,7 +460,6 @@ function nextQuestion() { // This function is used when the beginButton button i
 		// If the user is beginning a question on the assessment that is not the final question, change the text of the beginButton button to "Next Question" (this button initially says "Begin Assessment")
 	}
 	document.getElementById("questionText").innerHTML = questionArray[questionNumber][0]; // Populate the questionText div with the current question
-	alert("questionNumber == " + questionNumber + "\nquestionArray[questionNumber][1] == " + questionArray[questionNumber][1]);
 	switch(questionArray[questionNumber][1]) { // Which inputs are displayed for the question are based on what type of question it is
 		case 'm':
 			document.getElementById("b1").style.display = "inline";
@@ -251,7 +497,6 @@ function nextQuestion() { // This function is used when the beginButton button i
 			// Just in case something other the three question types is encountered, display an error to the user
 	}
 		if (questionNumber != 0) {
-	alert("numberOfQuestions == " + numberOfQuestions + "\nquestionNumber == " + questionNumber + "\nselectedAnswers[questionNumber-1] == " + selectedAnswers[questionNumber - 1]);
 	}
 	questionNumber++; // Increment the questionNumber variable to move to the next question in the assessment
 	
