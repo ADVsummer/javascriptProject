@@ -1,30 +1,10 @@
 
-<!-- TO DO:
-
-DUE BY 1/27 (project milestone 3.1):
-
--Convert from 3 questions to an incrementable array. How will it be defined?
-	-Assessement builder
--Add a checkmark question type and allow the correct results to be a combination of different answers
--Fix the small glitch of the non-display table displaying as a dot?
-
--Work on the project workbook
-
-DUE BY 1/27 (?) (project milestone 3.2):
-
--Allow the user to choose the number of questions they wish to answer
--Give the user the option to impose a time limit on themselves
-
--turn the application into a multi-frame application so that it has a definite start and end (?)
-
--Work on the project workbook
-
-ALSO DUE BY 2/4 (?) (project milestone 3.3):
+<!--
+DUE BY 2/4 (project milestone 3.3):
 -Store user's information about previous results using cookies OR localStorage (HTML5). This enables us to give the user a running average score at the end of the quiz. This is the final milestone.
 
 -Work on the project workbook
 -All work for each milestone should have Agile user stories created, and final submissions should include user stories along with a screenshot of version control history in SourceTree and GitHub
-
 -->
 
 <!DOCTYPE HTML>
@@ -114,42 +94,18 @@ ALSO DUE BY 2/4 (?) (project milestone 3.3):
 	</div>
 	
 	<div id="bottomButtons">
-		
-		<div class="tooltip">
-			<button type="button" id="addButton" onclick="assessmentBuilder()">Add another question</button>
-			<span class="tooltiptext">Add the next question to the assessment.</span>
-		</div>
-		<div class="tooltip">
-			<button type="button" id="saveButton" onclick="saveAssessment()">Save & exit</button>
-			<span class="tooltiptext">Save the assessment. After saving, users will be able to take this assessment.</span>
-		</div>
-		<div class="tooltip">
-			<button type="button" id="builderButton" onclick="beginAssessmentBuilder()">Open the Assessment Builder</button>
-			<span class="tooltiptext">Build a new quiz with the Assessment Builder. Any previously-built assessments will be erased.</span>
-		</div>
-		<div class="tooltip">
-			<button type="button" id="takeBuiltButton" onclick="validateAssessmentBuilt()">Take a built assessment</button>
-			<span class="tooltiptext">Take a quiz built with the Assessment Biulder.</span>
-		</div>
-		<div class="tooltip">
-			<button type="button" id="takePracticeButton" onclick="practiceAssessment()">Take a practice assessment</button>
-			<span class="tooltiptext">Take a pre-defined practice assessment.</span>
-		</div>
-		<div class="tooltip">
-			<button type="button" id="startButton" onclick="assessmentSelection()">Begin an Assessment</button>
-			<span class="tooltiptext">Take an quiz built with the Assessment Builder or take a pre-defined practice assessment.</span>
-		</div>
-		<div class ="tooltip">
-			<button type="button" id="backButton" onclick="mainScreen()">Back to main screen</button>
-			<span class="tooltiptext">Go back to the first screen.</span>
-		</div>
+		<button type="button" id="addButton" onclick="assessmentBuilder()">Add another question</button>
+		<button type="button" id="saveButton" onclick="saveAssessment()">Save & exit</button>
+		<button type="button" id="builderButton" onclick="beginAssessmentBuilder()">Open the Assessment Builder</button>
+		<button type="button" id="takeBuiltButton" onclick="validateAssessmentBuilt()">Take a built assessment</button>
+		<button type="button" id="takePracticeButton" onclick="practiceAssessment()">Take a practice assessment</button>
+		<button type="button" id="startButton" onclick="assessmentSelection()">Begin an Assessment</button>
+		<button type="button" id="backButton" onclick="mainScreen()">Back to main screen</button>
 		<button type="button" id="beginButton" onclick="nextQuestion()">Start!</button>
 		<!-- the beginButton button calls the nextQuestion function to populate the first question in the assessment and change the text of this button to "Next Question". When the last question is loaded, this button disappears -->
 		<button type="button" id="finishButton" onclick="loadResults()">Finish Assessment</button>
 		<!-- When the last question's content is loaded in the assessment (via the nextQuestion function), the finishButton button appears. When it is clicked, the loadResults function is called, which saves the last question and displays the results in the resultsTable table -->
 	</div>
-
-	
 </form>
 
 <hr>
