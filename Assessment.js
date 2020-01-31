@@ -1,5 +1,9 @@
 
 
+/*
+
+*/
+
 var testName, testTime = 5; // Variables to later be used for the name of the assessment and the number of minutes the user has to complete the assessment
 
 var assessmentBuilt = false;
@@ -241,7 +245,6 @@ function saveAssessment() {
 			return false;
 		}
 		
-		alert(builderAssessment.length);
 		var correctAnswerString;
 	
 		if (document.getElementById("abc1").checked) {
@@ -267,7 +270,7 @@ function saveAssessment() {
 			default:
 				alert("Whoops!");
 				break;
-		}		
+		}			
 	/* End repeated question validation and saving code from assessmentBuilder() */
 	}
 
@@ -431,12 +434,13 @@ function validateTime() {
 		}
 	} else {
 		testTime = "unlimited";
+		document.getElementById("timeRemaining").innerHTML = "Time remaining: unlimited";
 		return true;
 	}
 }
 
 function updateTimer() {
-	secondsRemaining = secondsRemaining - 0.5;
+	secondsRemaining --;
 	document.getElementById("timeRemaining").innerHTML = "Seconds remaining: " + secondsRemaining;
 }
 
@@ -450,8 +454,6 @@ function nextQuestion() { // This function is used when the beginButton button i
 		if (!validateTime()) {
 			alert("Please enter the amount of time for the quiz in minutes, or leave this field blank to have an unlimited amount of time to take the quiz.");
 			return false;
-		} else {
-			validateTime();
 		}
 	}
 	
@@ -460,7 +462,7 @@ function nextQuestion() { // This function is used when the beginButton button i
 		loadResults();
 	}
 
-if (secondsRemaining > 0) {
+if (secondsRemaining > 0 || testTime == "unlimited") {
 	areYouSure = true;
 	numberOfQuestions = questionArray.length;
 	document.getElementById("timeRemaining").style.display = "inline";
@@ -472,11 +474,11 @@ if (secondsRemaining > 0) {
 			if (document.getElementById("qInput1_1").checked) {
 				selectedAnswers.push(questionArray[questionNumber-1][3]);
 			} else if (document.getElementById("qInput1_2").checked) {
-				selectedAnswers.push(questionArray[questionNumber-1][4])
+				selectedAnswers.push(questionArray[questionNumber-1][4]);
 			} else if (document.getElementById("qInput1_3").checked) {
-				selectedAnswers.push(questionArray[questionNumber-1][5])
+				selectedAnswers.push(questionArray[questionNumber-1][5]);
 			} else if (document.getElementById("qInput1_4").checked) {
-				selectedAnswers.push(questionArray[questionNumber-1][6])
+				selectedAnswers.push(questionArray[questionNumber-1][6]);
 			}
 			/* For multiple choice or true/false questions, populate the selectedAnswers Array with the text of the answer chosen by the user for the current question, based on which radio button input is selected by the user */
 		} else if (questionNumber != 0 && questionArray [questionNumber-1][1] == "f") {
@@ -556,13 +558,13 @@ function loadResults() { // This function displays the user's results at the end
 	document.getElementById("resultsTableDiv").style.display = "inline";
 	if (questionArray [questionNumber-1][1] != "f") { // Save the answer to the last question to the selectedAnswers array, similar to how the nextQuestion function saved the answers to all the other questions
 		if (document.getElementById("qInput1_1").checked) {
-			selectedAnswers.push(document.getElementById("qInput1_1").innerHTML);
+			selectedAnswers.push(questionArray[questionNumber-1][3]);
 		} else if (document.getElementById("qInput1_2").checked) {
-			selectedAnswers.push(document.getElementById("qInput1_2").innerHTML);
+			selectedAnswers.push(questionArray[questionNumber-1][4]);
 		} else if (document.getElementById("qInput1_3").checked) {
-			selectedAnswers.push(document.getElementById("qInput1_3").innerHTML);
+			selectedAnswers.push(questionArray[questionNumber-1][5]);
 		} else if (document.getElementById("qInput1_4").checked) {
-			selectedAnswers.push(document.getElementById("qInput1_4").innerHTML);
+			selectedAnswers.push(questionArray[questionNumber-1][6]);
 		}
 	} else if (questionArray [questionNumber-1][1] == "f") {
 		selectedAnswers.push(document.getElementById("qInput3").value);
