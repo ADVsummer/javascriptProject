@@ -7,43 +7,14 @@ DUE BY 2/4 (project milestone 3.3):
 -All work for each milestone should have Agile user stories created, and final submissions should include user stories along with a screenshot of version control history in SourceTree and GitHub
 -->
 
-<!--
-<script language="JavaScript" type="text/JavaScript">
-	document.cookie = "UserName=Paul;expires=Fri, 07 Feb 2020 00:00:00;";
-	
-	function setCookie(cookieName, cookieValue, cookiePath, cookieExpires) {
-		cookieValue = escape(cookieValue);
-		
-		if (cookieExpires == "") {
-			var newDate = new Date();
-			newDate.setMonth(newDate.getMonth() + 6);
-			cookieExpires = newDate.toGMTString();
-		}
-		
-		if (cookiePath != "") {
-			cookiePath = ";Path=" + cookiePath;
-		}
-		
-		document.cookie = cookieName + "=" + cookieValue +
-		";expires=" + cookieExpires + cookiePath;
-		
-		
-		
-		
-	}
-</script>
-
-expires, path, domain, secure (t/f)
-name, value [, expires] [, path] [, domain] [, security]
--->
-
 <!DOCTYPE HTML>
 <html>
 <head>
 <meta charset="utf-8">
 <title>Assessment</title>
 <link href="Assessment.css" rel="stylesheet">
-<script src="Assessment.js"></script>
+<script language="JavaScript" type="text/JavaScript" src="Assessment.js"></script>
+<script language="JavaScript" type="text/JavaScript" src="CookieFunctions.js"></script>
 </head>
 
 <body onload="mainScreen()">
@@ -136,6 +107,7 @@ name, value [, expires] [, path] [, domain] [, security]
 		<button type="button" id="finishButton" onclick="loadResults()">Finish Assessment</button>
 		<!-- When the last question's content is loaded in the assessment (via the nextQuestion function), the finishButton button appears. When it is clicked, the loadResults function is called, which saves the last question and displays the results in the resultsTable table -->
 	</div>
+
 </form>
 
 <hr>

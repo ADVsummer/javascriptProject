@@ -581,11 +581,33 @@ function loadResults() { // This function displays the user's results at the end
 		var row = table.insertRow(i); // Insert a row into table for this question (and define this row as the row variable)
 		var cell = row.insertCell(0); // Insert a cell in the first column of row (and define this cell as the cell variable)
 		if (i == numberOfQuestions + 1) {
-			cell.colSpan = 4; // The last row contains one cell spanning all four columns
+			cell.colSpan = 2; // The last row contains one cell spanning all four columns
 			cell.style.backgroundColor = "gold"; // The score is displayed in a cell with a gold background
 			cell.style.fontWeight = "bold"; // The score is displayed in bold text
 			finalScore = Math.round((correctAnswers/numberOfQuestions) * 100); // finalScore is recorded as an the number of correct answers divided by the number of questions, multiplied by 100 and rounded to an integer
 			cell.innerHTML = "Your score is: " + correctAnswers + " / " + numberOfQuestions + " (" + finalScore + "%)";
+			cell = row.insertCell(1);
+			cell.colSpan = 3;
+			cell.style.backgroundColor = "gold";
+			cell.style.fontWeight = "bold";
+			
+			if (getCookieValue("AverageScore") == null) {
+				var previousAverageScore = 0;
+			} else {
+				var previousAverageScore = getCookieValue("AverageScore");
+			}
+
+			if (getCookieValue("Attempts") == null) {
+				var previousNumberOfAttempts = 0;
+			} else {
+				var previousNumberOfAttempts = parseInt(getCookieValue("Attempts"));
+			}
+
+			var newAverageScore = ((previousAverageScore * previousNumberOfAttempts) + finalScore) / (previousNumberOfAttempts + 1);
+			var newNumberOfAttempts = previousNumberOfAttempts + 1;
+			setCookie("AverageScore", newAverageScore, "", "");
+			setCookie("Attempts", newNumberOfAttempts, "", "");
+			cell.innerHTML = "Running average score: " + Math.round(((previousAverageScore * previousNumberOfAttempts) + finalScore) / (previousNumberOfAttempts + 1)) + "%";
 			return true;
 			// In the last time through the loop, display a cell in the last row of table showing the total number of correct answers out of the total possible score, then end the function
 		}
